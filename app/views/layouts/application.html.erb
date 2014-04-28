@@ -6,8 +6,8 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
+<body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -37,15 +37,24 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
+        <% unless current_user %>
           <li>
             <%= link_to "Sign In", new_user_session_path %>
           </li>
+
+          <li>
+            <%= link_to "Create new Account", new_user_registration_path %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+          </li>
+        <% end %>
         </ul>
       </div>
     </div>
   </nav>
 
-<%= yield %>
-
+  <%= yield %>
 </body>
 </html>
