@@ -1,4 +1,6 @@
 Netrunner::Application.routes.draw do
+  root 'application#index'
+
   resources :seasons
 
   devise_for :users
