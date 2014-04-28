@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140428091715) do
     t.string   "last_sign_in_ip"
     t.integer  "number_of_games",        default: 0,      null: false
     t.decimal  "rating",                 default: 1500.0, null: false
-    t.decimal  "deviation",              default: 0.0,    null: false
+    t.decimal  "deviation",              default: 350.0,  null: false
     t.decimal  "volatality",             default: 0.0,    null: false
     t.string   "country",                default: "",     null: false
     t.datetime "created_at"
