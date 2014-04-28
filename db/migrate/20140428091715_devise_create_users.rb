@@ -22,7 +22,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Rating
       t.integer :number_of_games, null: false, default: 0
-      t.integer :rating,          null: false, default: 0
+      t.decimal :rating,          null: false, default: 1500
       t.decimal :deviation,       null: false, default: 0
       t.decimal :volatality,      null: false, default: 0
 
