@@ -1,4 +1,6 @@
 Netrunner::Application.routes.draw do
+  resources :events
+
   root 'application#index'
 
   resources :seasons
