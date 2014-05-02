@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501102143) do
+ActiveRecord::Schema.define(version: 20140501132327) do
 
   create_table "events", force: true do |t|
     t.datetime "started"
@@ -21,6 +21,23 @@ ActiveRecord::Schema.define(version: 20140501102143) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "factions", force: true do |t|
+    t.string   "name"
+    t.boolean  "is_runner",      default: false
+    t.boolean  "is_corporation", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "identities", force: true do |t|
+    t.string   "name"
+    t.integer  "faction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["faction_id"], name: "index_identities_on_faction_id"
 
   create_table "seasons", force: true do |t|
     t.string   "name"
