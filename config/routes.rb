@@ -1,4 +1,6 @@
 Netrunner::Application.routes.draw do
+  resources :matches
+
   resources :events
 
   root 'application#index'

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Played on:</strong>
+  <%= @match.played_on %>
+</p>
+
+<p>
+  <strong>First player:</strong>
+  <%= @match.first_player %>
+</p>
+
+<p>
+  <strong>Second player:</strong>
+  <%= @match.second_player %>
+</p>
+
+<p>
+  <strong>First player corporation:</strong>
+  <%= @match.first_player_corporation %>
+</p>
+
+<p>
+  <strong>First player runner:</strong>
+  <%= @match.first_player_runner %>
+</p>
+
+<p>
+  <strong>Second player corporation:</strong>
+  <%= @match.second_player_corporation %>
+</p>
+
+<p>
+  <strong>Second player runner:</strong>
+  <%= @match.second_player_runner %>
+</p>
+
+<p>
+  <strong>First player corporation points:</strong>
+  <%= @match.first_player_corporation_points %>
+</p>
+
+<p>
+  <strong>First player runner points:</strong>
+  <%= @match.first_player_runner_points %>
+</p>
+
+<p>
+  <strong>Second player corporation points:</strong>
+  <%= @match.second_player_corporation_points %>
+</p>
+
+<p>
+  <strong>Second player runner points:</strong>
+  <%= @match.second_player_runner_points %>
+</p>
+
+<p>
+  <strong>First player league points:</strong>
+  <%= @match.first_player_league_points %>
+</p>
+
+<p>
+  <strong>Second player league points:</strong>
+  <%= @match.second_player_league_points %>
+</p>
+
+<%= link_to 'Edit', edit_match_path(@match) %> |
+<%= link_to 'Back', matches_path %>

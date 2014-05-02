@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502101030) do
+ActiveRecord::Schema.define(version: 20140502142530) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -38,6 +38,31 @@ ActiveRecord::Schema.define(version: 20140502101030) do
   end
 
   add_index "identities", ["faction_id"], name: "index_identities_on_faction_id"
+
+  create_table "matches", force: true do |t|
+    t.date     "played_on"
+    t.integer  "first_player_id"
+    t.integer  "second_player_id"
+    t.integer  "first_player_corporation_id"
+    t.integer  "first_player_runner_id"
+    t.integer  "second_player_corporation_id"
+    t.integer  "second_player_runner_id"
+    t.integer  "first_player_corporation_points"
+    t.integer  "first_player_runner_points"
+    t.integer  "second_player_corporation_points"
+    t.integer  "second_player_runner_points"
+    t.integer  "first_player_league_points"
+    t.integer  "second_player_league_points"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "matches", ["first_player_corporation_id"], name: "index_matches_on_first_player_corporation_id"
+  add_index "matches", ["first_player_id"], name: "index_matches_on_first_player_id"
+  add_index "matches", ["first_player_runner_id"], name: "index_matches_on_first_player_runner_id"
+  add_index "matches", ["second_player_corporation_id"], name: "index_matches_on_second_player_corporation_id"
+  add_index "matches", ["second_player_id"], name: "index_matches_on_second_player_id"
+  add_index "matches", ["second_player_runner_id"], name: "index_matches_on_second_player_runner_id"
 
   create_table "seasons", force: true do |t|
     t.string   "name"

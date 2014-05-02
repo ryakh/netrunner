@@ -1,0 +1,69 @@
+<%= form_for(@match) do |f| %>
+  <% if @match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% @match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :played_on %><br>
+    <%= f.date_select :played_on %>
+  </div>
+  <div class="field">
+    <%= f.label :first_player_id %><br>
+    <%= f.text_field :first_player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :second_player_id %><br>
+    <%= f.text_field :second_player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :first_player_corporation_id %><br>
+    <%= f.text_field :first_player_corporation_id %>
+  </div>
+  <div class="field">
+    <%= f.label :first_player_runner_id %><br>
+    <%= f.text_field :first_player_runner_id %>
+  </div>
+  <div class="field">
+    <%= f.label :second_player_corporation_id %><br>
+    <%= f.text_field :second_player_corporation_id %>
+  </div>
+  <div class="field">
+    <%= f.label :second_player_runner_id %><br>
+    <%= f.text_field :second_player_runner_id %>
+  </div>
+  <div class="field">
+    <%= f.label :first_player_corporation_points %><br>
+    <%= f.number_field :first_player_corporation_points %>
+  </div>
+  <div class="field">
+    <%= f.label :first_player_runner_points %><br>
+    <%= f.number_field :first_player_runner_points %>
+  </div>
+  <div class="field">
+    <%= f.label :second_player_corporation_points %><br>
+    <%= f.number_field :second_player_corporation_points %>
+  </div>
+  <div class="field">
+    <%= f.label :second_player_runner_points %><br>
+    <%= f.number_field :second_player_runner_points %>
+  </div>
+  <div class="field">
+    <%= f.label :first_player_league_points %><br>
+    <%= f.number_field :first_player_league_points %>
+  </div>
+  <div class="field">
+    <%= f.label :second_player_league_points %><br>
+    <%= f.number_field :second_player_league_points %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
