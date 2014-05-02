@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501132327) do
+ActiveRecord::Schema.define(version: 20140502101030) do
 
   create_table "events", force: true do |t|
-    t.datetime "started"
-    t.datetime "finished"
-    t.boolean  "is_closed",  default: false
-    t.boolean  "is_rated",   default: false
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.boolean  "is_closed",   default: false
+    t.boolean  "is_rated",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
