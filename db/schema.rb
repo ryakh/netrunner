@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502142530) do
+ActiveRecord::Schema.define(version: 20140503185440) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(version: 20140502142530) do
     t.boolean  "is_rated",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "season_id"
   end
+
+  add_index "events", ["season_id"], name: "index_events_on_season_id"
 
   create_table "factions", force: true do |t|
     t.string   "name"
