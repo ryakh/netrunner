@@ -11,59 +11,122 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :played_on %><br>
-    <%= f.date_select :played_on %>
+  <div class="row"> <!-- Played on -->
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.date_select :played_on %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :first_player_id %><br>
-    <%= f.text_field :first_player_id %>
+
+  <div class="row"> <!-- First player -->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= select_tag "first_player_id",
+            options_from_collection_for_select(User.all, "id", "fullname"),
+            class: "form-control" %>
+        </div>
+
+        <div class="panel-body">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <%= select_tag "first_player_corporation_id",
+                    options_from_collection_for_select(Identity.corporations, "id", "name"),
+                    class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <%= f.text_field :first_player_corporation_points,
+                    class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <%= select_tag "first_player_runner_id",
+                    options_from_collection_for_select(Identity.runners, "id", "name"),
+                    class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <%= f.text_field :first_player_runner_points,
+                    class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :second_player_id %><br>
-    <%= f.text_field :second_player_id %>
+
+  <div class="row"> <!-- Second player -->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <%= select_tag "second_player_id",
+            options_from_collection_for_select(User.all, "id", "fullname"),
+            prompt: "Select your oponent...",
+            class: "form-control" %>
+        </div>
+
+        <div class="panel-body">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <%= select_tag "second_player_corporation_id",
+                    options_from_collection_for_select(Identity.corporations, "id", "name"),
+                    class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <%= f.text_field :second_player_corporation_points,
+                    class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-9">
+                <div class="form-group">
+                  <%= select_tag "second_player_runner_id",
+                    options_from_collection_for_select(Identity.runners, "id", "name"),
+                    class: "form-control" %>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <%= f.text_field :second_player_runner_points,
+                    class: "form-control" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :first_player_corporation_id %><br>
-    <%= f.text_field :first_player_corporation_id %>
-  </div>
-  <div class="field">
-    <%= f.label :first_player_runner_id %><br>
-    <%= f.text_field :first_player_runner_id %>
-  </div>
-  <div class="field">
-    <%= f.label :second_player_corporation_id %><br>
-    <%= f.text_field :second_player_corporation_id %>
-  </div>
-  <div class="field">
-    <%= f.label :second_player_runner_id %><br>
-    <%= f.text_field :second_player_runner_id %>
-  </div>
-  <div class="field">
-    <%= f.label :first_player_corporation_points %><br>
-    <%= f.number_field :first_player_corporation_points %>
-  </div>
-  <div class="field">
-    <%= f.label :first_player_runner_points %><br>
-    <%= f.number_field :first_player_runner_points %>
-  </div>
-  <div class="field">
-    <%= f.label :second_player_corporation_points %><br>
-    <%= f.number_field :second_player_corporation_points %>
-  </div>
-  <div class="field">
-    <%= f.label :second_player_runner_points %><br>
-    <%= f.number_field :second_player_runner_points %>
-  </div>
-  <div class="field">
-    <%= f.label :first_player_league_points %><br>
-    <%= f.number_field :first_player_league_points %>
-  </div>
-  <div class="field">
-    <%= f.label :second_player_league_points %><br>
-    <%= f.number_field :second_player_league_points %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.submit "Submit match result", class: "btn btn-success" %>
+    </div>
   </div>
 <% end %>
