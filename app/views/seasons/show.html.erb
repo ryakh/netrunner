@@ -1,14 +1,15 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        <% @seasons.each do |season| %>
+          <%= link_to season.name, season_path(season.id), class: "list-group-item" %>
+        <% end %>
+      </div>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @season.name %>
-</p>
-
-<p>
-  <strong>Is active:</strong>
-  <%= @season.is_active %>
-</p>
-
-<%= link_to 'Edit', edit_season_path(@season) %> |
-<%= link_to 'Back', seasons_path %>
+    <div class="col-md-9">
+      right
+    </div>
+  </div>
+</div>

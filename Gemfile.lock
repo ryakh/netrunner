@@ -76,7 +76,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.3)
     minitest (5.3.3)
-    multi_json (1.9.2)
+    multi_json (1.9.3)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
@@ -161,7 +161,7 @@ DEPENDENCIES
   capybara (= 2.2.1)
   coffee-rails (~> 4.0.0)
   devise (= 3.2.4)
-  factory_girl_rails (= 4.4.1)
+  factory_girl_rails (~> 4.4.1)
   faker
   jbuilder (~> 1.2)
   jquery-rails

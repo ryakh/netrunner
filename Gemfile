@@ -27,10 +27,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-group :development do
+group :development, :test do
   gem 'quiet_assets'
   gem 'rspec-rails', '2.14.2'
-  gem 'factory_girl_rails', '4.4.1'
+  gem 'factory_girl_rails', '~> 4.4.1'
   gem 'faker'
   gem 'capybara', '2.2.1'
   gem 'sqlite3'
