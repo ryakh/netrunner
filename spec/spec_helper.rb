@@ -42,4 +42,8 @@ RSpec.configure do |config|
 
   # Factory girl DSL import
   config.include FactoryGirl::Syntax::Methods
+
+  # User sign in
+  config.include Devise::TestHelpers,       :type => :controller
+  config.extend  Controller::SignInHelpers, :type => :controller
 end
