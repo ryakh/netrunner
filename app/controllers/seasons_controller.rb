@@ -1,5 +1,7 @@
 class SeasonsController < ApplicationController
   before_action :set_season, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :choke_non_judge, only: [:new, :edit, :create, :update, :destroy]
 
   def index
     redirect_to_latest_season
@@ -62,5 +64,11 @@ class SeasonsController < ApplicationController
     def redirect_to_latest_season
       season = Season.where(is_active: true).last
       redirect_to season_path(season.id)
+    end
+
+    def choke_non_judge
+      unless current_user.is_judge
+        not_found
+      end
     end
 end
