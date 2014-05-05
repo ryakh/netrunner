@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140503185440) do
+ActiveRecord::Schema.define(version: 20140505181240) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20140503185440) do
     t.string   "country",                default: "",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_judge",               default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
