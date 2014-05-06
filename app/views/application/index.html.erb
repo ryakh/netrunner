@@ -15,9 +15,9 @@
 
   <div class="row">
     <div class="col-md-12">
-      <button type="button" class="btn btn-primary btn-lg btn-block">
-        Submit Match Result
-      </button>
+      <%= link_to "Submit Match Result",
+        new_match_path,
+        class: "button btn-primary btn-lg btn-block text-center" %>
     </div>
   </div>
 
