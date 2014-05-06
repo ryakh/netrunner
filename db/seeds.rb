@@ -35,7 +35,7 @@ identities = [
   { name: 'Exile: Streethawk',                           faction_id: shaper.id },
   { name: 'Kate "Mac" McCaffrey: Digital Tinker',        faction_id: shaper.id },
   { name: 'Rielle "Kit" Peddler: Transhuman',            faction_id: shaper.id },
-  { name: 'The Professor: Keeper of Knowledge',          faction_id: shaper }
+  { name: 'The Professor: Keeper of Knowledge',          faction_id: shaper.id }
 ]
 
 identities.each do |identity|
