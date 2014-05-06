@@ -1,5 +1,5 @@
 Netrunner::Application.routes.draw do
-  resources :matches
+  resources :matches, except: [:index, :show]
 
   resources :events, only: [:show] do
     get :latest,    on: :collection

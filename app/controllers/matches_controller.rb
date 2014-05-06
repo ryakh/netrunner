@@ -1,28 +1,13 @@
 class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :edit, :update, :destroy]
 
-  # GET /matches
-  # GET /matches.json
-  def index
-    @matches = Match.all
-  end
-
-  # GET /matches/1
-  # GET /matches/1.json
-  def show
-  end
-
-  # GET /matches/new
   def new
     @match = Match.new
   end
 
-  # GET /matches/1/edit
   def edit
   end
 
-  # POST /matches
-  # POST /matches.json
   def create
     @match = Match.new(match_params)
 
@@ -37,8 +22,6 @@ class MatchesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /matches/1
-  # PATCH/PUT /matches/1.json
   def update
     respond_to do |format|
       if @match.update(match_params)
@@ -51,8 +34,6 @@ class MatchesController < ApplicationController
     end
   end
 
-  # DELETE /matches/1
-  # DELETE /matches/1.json
   def destroy
     @match.destroy
     respond_to do |format|
@@ -62,13 +43,23 @@ class MatchesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_match
       @match = Match.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params.require(:match).permit(:played_on, :first_player_id, :second_player_id, :first_player_corporation_id, :first_player_runner_id, :second_player_corporation_id, :second_player_runner_id, :first_player_corporation_points, :first_player_runner_points, :second_player_corporation_points, :second_player_runner_points, :first_player_league_points, :second_player_league_points)
+      params.require(:match).permit(
+        :played_on,
+        :first_player_id,
+        :second_player_id,
+        :first_player_corporation_id,
+        :first_player_runner_id,
+        :second_player_corporation_id,
+        :second_player_runner_id,
+        :first_player_corporation_points,
+        :first_player_runner_points,
+        :second_player_corporation_points,
+        :second_player_runner_points
+      )
     end
 end
