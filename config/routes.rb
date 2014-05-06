@@ -1,13 +1,17 @@
 Netrunner::Application.routes.draw do
   resources :matches
 
-  resources :events
+  resources :events, only: [:show] do
+    get :latest,    on: :collection
+    put :calculate, on: :member
+  end
 
   root 'application#index'
 
   resources :seasons
 
   devise_for :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

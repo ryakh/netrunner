@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
   def index
   end
 
+  private
+    def choke_non_judge
+      unless current_user.is_judge
+        not_found
+      end
+    end
+
   protected
     def not_found
       raise ActionController::RoutingError.new('Not found')

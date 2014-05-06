@@ -65,10 +65,4 @@ class SeasonsController < ApplicationController
       season = Season.where(is_active: true).last
       redirect_to season_path(season.id)
     end
-
-    def choke_non_judge
-      unless current_user.is_judge
-        not_found
-      end
-    end
 end
