@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505181240) do
+ActiveRecord::Schema.define(version: 20140507074814) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -58,8 +58,10 @@ ActiveRecord::Schema.define(version: 20140505181240) do
     t.integer  "second_player_league_points"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
 
+  add_index "matches", ["event_id"], name: "index_matches_on_event_id"
   add_index "matches", ["first_player_corporation_id"], name: "index_matches_on_first_player_corporation_id"
   add_index "matches", ["first_player_id"], name: "index_matches_on_first_player_id"
   add_index "matches", ["first_player_runner_id"], name: "index_matches_on_first_player_runner_id"

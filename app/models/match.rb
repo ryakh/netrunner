@@ -7,7 +7,10 @@ class Match < ActiveRecord::Base
   belongs_to :second_player_corporation, class_name: 'Identity'
   belongs_to :second_player_runner,      class_name: 'Identity'
 
+  belongs_to :event
+
   before_create :create_new_event, if: :no_active_event?
+  before_create :set_event
 
   private
     def create_new_event
@@ -21,5 +24,9 @@ class Match < ActiveRecord::Base
       if Event.find_by(is_closed: false).nil?
         return true
       end
+    end
+
+    def set_event
+      self.event = Event.find_by(is_closed: false)
     end
 end
