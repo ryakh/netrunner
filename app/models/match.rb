@@ -21,12 +21,12 @@ class Match < ActiveRecord::Base
     end
 
     def no_active_event?
-      if Event.find_by(is_closed: false).nil?
+      if Event.current.nil?
         return true
       end
     end
 
     def set_event
-      self.event = Event.find_by(is_closed: false)
+      self.event = Event.current
     end
 end
