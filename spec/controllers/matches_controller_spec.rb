@@ -34,7 +34,7 @@ describe MatchesController do
 
       it "redirects to the event" do
         post :create, { match: valid_attributes }
-        response.should redirect_to(Match.last)
+        response.should redirect_to(Event.current)
       end
     end
 
