@@ -1,7 +1,10 @@
 <%= form_for(@match) do |f| %>
   <% if @match.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@match.errors.count, "error") %> prohibited this match from being saved:</h2>
+    <div id="error_explanation" class="alert alert-danger">
+      <b>
+        <%= pluralize(@match.errors.count, "error") %> prohibited this match from
+        being saved:
+      </b>
 
       <ul>
       <% @match.errors.full_messages.each do |message| %>
@@ -23,9 +26,10 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <%= select_tag "first_player_id",
+          <%= f.select(:first_player_id,
             options_from_collection_for_select(User.all, "id", "fullname"),
-            class: "form-control" %>
+            { prompt: "Select player..." },
+            { class: "form-control" }) %>
         </div>
 
         <div class="panel-body">
@@ -33,9 +37,10 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= select_tag "first_player_corporation_id",
+                  <%= f.select(:first_player_corporation_id,
                     options_from_collection_for_select(Identity.corporations, "id", "name"),
-                    class: "form-control" %>
+                    {},
+                    { class: "form-control" }) %>
                 </div>
               </div>
 
@@ -52,9 +57,10 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= select_tag "first_player_runner_id",
+                  <%= f.select(:first_player_runner_id,
                     options_from_collection_for_select(Identity.runners, "id", "name"),
-                    class: "form-control" %>
+                    {},
+                    { class: "form-control" }) %>
                 </div>
               </div>
 
@@ -75,10 +81,10 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <%= select_tag "second_player_id",
+          <%= f.select(:second_player_id,
             options_from_collection_for_select(User.all, "id", "fullname"),
-            prompt: "Select your oponent...",
-            class: "form-control" %>
+            { prompt: "Select oponent..." },
+            { class: "form-control" }) %>
         </div>
 
         <div class="panel-body">
@@ -86,9 +92,10 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= select_tag "second_player_corporation_id",
+                  <%= f.select(:second_player_corporation_id,
                     options_from_collection_for_select(Identity.corporations, "id", "name"),
-                    class: "form-control" %>
+                    {},
+                    { class: "form-control" }) %>
                 </div>
               </div>
 
@@ -105,9 +112,10 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= select_tag "second_player_runner_id",
+                  <%= f.select(:second_player_runner_id,
                     options_from_collection_for_select(Identity.runners, "id", "name"),
-                    class: "form-control" %>
+                    {},
+                    { class: "form-control" }) %>
                 </div>
               </div>
 
