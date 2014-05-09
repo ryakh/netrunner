@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def latest
     @event = Event.find_by(is_closed: false)
+    redirect_to @event
   end
 
   def calculate

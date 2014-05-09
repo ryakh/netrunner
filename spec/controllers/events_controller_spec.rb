@@ -13,8 +13,15 @@ describe EventsController do
 
   describe 'GET latest' do
     it 'assigns the requested event as @event' do
-      get :latest, { id: event.to_param }
+      event = create(:event)
+      get :latest
       assigns(:event).should eq(event)
+    end
+
+    it 'redirects user to the last event' do
+      event = create(:event)
+      get :latest
+      response.should redirect_to(event)
     end
   end
 
