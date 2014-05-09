@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140507074814) do
+ActiveRecord::Schema.define(version: 20140509144021) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20140507074814) do
     t.integer  "number_of_games",        default: 0,      null: false
     t.decimal  "rating",                 default: 1500.0, null: false
     t.decimal  "deviation",              default: 350.0,  null: false
-    t.decimal  "volatality",             default: 0.06,   null: false
+    t.decimal  "volatility",             default: 0.06,   null: false
     t.string   "country",                default: "",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
