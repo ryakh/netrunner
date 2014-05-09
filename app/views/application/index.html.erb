@@ -46,19 +46,14 @@
         </thead>
 
         <tbody>
+        <% User.all.each do |user| %>
           <tr>
-            <td>Doge</td>
-            <td>1500</td>
-            <td>350</td>
-            <td>0.06</td>
+            <td><%= user.fullname %></td>
+            <td><%= user.rating %></td>
+            <td><%= user.deviation %></td>
+            <td><%= user.volatility %></td>
           </tr>
-
-          <tr>
-            <td>Doge</td>
-            <td>1500</td>
-            <td>350</td>
-            <td>0.06</td>
-          </tr>
+        <% end %>
         </tbody>
        </table>
     </div>
