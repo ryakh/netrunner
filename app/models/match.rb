@@ -1,4 +1,16 @@
 class Match < ActiveRecord::Base
+  include ActiveModel::Validations
+
+  validates :first_player,
+    :second_player,
+    :first_player_corporation_points,
+    :first_player_runner_points,
+    :second_player_corporation_points,
+    :second_player_runner_points, presence: true
+
+  validates_with MatchPointsValidator
+
+
   belongs_to :first_player,              class_name: 'User'
   belongs_to :second_player,             class_name: 'User'
 

@@ -89,5 +89,67 @@ describe Match do
         expect(event.second_player_league_points).to eq(4)
       end
     end
+
+    describe 'validation' do
+      it 'expects user to be unique' do
+        user = create(:user)
+
+        expect {
+          create(
+            :match,
+            first_player: user,
+            second_player: user
+          )
+        }.to raise_error
+      end
+
+      it 'expects points summary to be less than 32' do
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  10,
+            first_player_runner_points:       10,
+            second_player_corporation_points: 10,
+            second_player_runner_points:      10
+          )
+        }.to raise_error
+      end
+
+      it 'expects points summary to be more or equal to 20' do
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  10,
+            first_player_runner_points:       9,
+            second_player_corporation_points: 0,
+            second_player_runner_points:      0
+          )
+        }.to raise_error
+      end
+
+      it 'expect match result to contain at least 2 wins' do
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  10,
+            first_player_runner_points:       9,
+            second_player_corporation_points: 5,
+            second_player_runner_points:      0
+          )
+        }.to raise_error
+      end
+
+      it 'expects the sum of loses not to exceed 12' do
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  10,
+            first_player_runner_points:       10,
+            second_player_corporation_points: 7,
+            second_player_runner_points:      7
+          )
+        }.to raise_error
+      end
+    end
   end
 end
