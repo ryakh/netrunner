@@ -3,7 +3,11 @@
     <div class="col-md-3">
       <div class="list-group">
         <% @seasons.each do |season| %>
-          <%= link_to season.name, season_path(season.id), class: "list-group-item" %>
+          <%= link_to season_path(season.id), class: "list-group-item" do %>
+            <%= season.name %>
+
+            <span class="badge">A</span>
+          <% end %>
         <% end %>
       </div>
     </div>
