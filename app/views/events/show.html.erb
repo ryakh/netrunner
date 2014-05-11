@@ -1,5 +1,17 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>
+        <%= @event.started_at.strftime("%U").to_i.ordinalize %> week
+      </h1>
+    </div>
+  </div>
 
-<% @event.matches.each do |match| %>
-  <%= match %>
-<% end %>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= render @event.matches %>
+    </div>
+  </div>
+</div>
