@@ -44,7 +44,7 @@ identities = [
 users = [
   { fullname: 'Konco',    email: 'konco@netrunner.io' },
   { fullname: 'David',    email: 'david@netrunner.io' },
-  { fullname: 'Peekay',   email: 'peekay@netrunner.io' },
+  { fullname: 'Peekay',   email: 'peekay@netrunner.io', is_judge: true },
   { fullname: 'Miro',     email: 'miro@netrunner.io' },
   { fullname: 'Lubo',     email: 'lubo@netrunner.io' },
   { fullname: 'Peta',     email: 'peta@netrunner.io' },
@@ -52,7 +52,7 @@ users = [
   { fullname: 'Noro',     email: 'noro@netrunner.io' },
   { fullname: 'Zdeno',    email: 'zdeno@netrunner.io' },
   { fullname: 'Valika',   email: 'valika@netrunner.io' },
-  { fullname: 'Ruslan',   email: 'ruslan@netrunner.io' },
+  { fullname: 'Ruslan',   email: 'ruslan@netrunner.io', is_judge: true },
   { fullname: 'Ivan',     email: 'ivan@netrunner.io' },
   { fullname: 'Silma',    email: 'silma@netrunner.io' },
   { fullname: 'Nero',     email: 'nero@netrunner.io' },
@@ -95,12 +95,12 @@ class MatchSeeder
       event = guessed_event
     end
 
-    puts event.attributes
     return event
   end
 end
 
-season = Season.create(name: 'Season 4')
+season = Season.create(name: 'Season 4', is_active: false)
+Season.create(name: 'Season 5', is_active: true)
 
 csv_text = File.read('db/seeds/season4.csv')
 csv = CSV.parse(csv_text, headers: false)
