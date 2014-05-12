@@ -62,7 +62,7 @@ class SeasonsController < ApplicationController
     end
 
     def redirect_to_latest_season
-      season = Season.where(is_active: true).last
+      season = Season.last
       redirect_to season_path(season.id)
     end
 end
