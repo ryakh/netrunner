@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def latest
-    @event = Event.find_by(is_closed: false)
+    get_or_create_event
     redirect_to @event
   end
 
@@ -18,5 +18,18 @@ class EventsController < ApplicationController
   private
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def get_or_create_event
+      event = Event.find_by(
+        started_at: Time.now.beginning_of_week,
+        finished_at: Time.now.end_of_week
+      )
+
+      if event.nil?
+        @event = Event.create_current
+      else
+        @event = event
+      end
     end
 end

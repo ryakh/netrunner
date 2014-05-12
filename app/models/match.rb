@@ -44,10 +44,7 @@ class Match < ActiveRecord::Base
 
   private
     def create_new_event
-      Event.create(
-        started_at:  DateTime.now.beginning_of_week,
-        finished_at: DateTime.now.end_of_week
-      )
+      Event.create_current
     end
 
     def no_active_event?

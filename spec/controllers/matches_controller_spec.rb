@@ -4,6 +4,8 @@ describe MatchesController do
   let(:match) { create(:match) }
   let(:valid_attributes) { attributes_for(:match) }
 
+  sign_in_user('user')
+
   describe "GET new" do
     it "assigns a new match as @match" do
       get :new
