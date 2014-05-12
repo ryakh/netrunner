@@ -10,7 +10,6 @@ class Match < ActiveRecord::Base
 
   validates_with MatchPointsValidator
 
-
   belongs_to :first_player,              class_name: 'User'
   belongs_to :second_player,             class_name: 'User'
 
