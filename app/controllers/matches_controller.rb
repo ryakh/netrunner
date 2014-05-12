@@ -1,6 +1,8 @@
 class MatchesController < ApplicationController
-  before_action :set_match, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_match, only: [:edit, :update, :destroy]
+  before_action :choke_unpermitted_user, only: [:edit, :update, :destroy]
+  before_action :choke_if_event_is_rated, only: [:destroy]
 
   def new
     @match = Match.new
@@ -26,7 +28,7 @@ class MatchesController < ApplicationController
   def update
     respond_to do |format|
       if @match.update(match_params)
-        format.html { redirect_to @match, notice: 'Match was successfully updated.' }
+        format.html { redirect_to @match.event, notice: 'Match was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -62,5 +64,26 @@ class MatchesController < ApplicationController
         :second_player_corporation_points,
         :second_player_runner_points
       )
+    end
+
+    def choke_unpermitted_user
+      unless ([current_user.id] - permitted_users).empty?
+        not_found
+      end
+    end
+
+    def choke_if_event_is_rated
+      if @match.event.is_rated
+        not_found
+      end
+    end
+
+  protected
+    def permitted_users
+      [
+        @match.first_player_id,
+        @match.second_player_id,
+        User.judges
+      ].flatten
     end
 end

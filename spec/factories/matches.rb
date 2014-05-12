@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :match do
-    played_on                '2014-05-02'
+    played_on                Time.now
 
     first_player_corporation_points  10
     first_player_runner_points       10
