@@ -3,6 +3,11 @@
     <div class="col-md-12">
       <h1>
         <%= @event.started_at.strftime("%U").to_i.ordinalize %> week
+
+        <small>
+          <%= @event.started_at.strftime("%d %b %Y") %> &ndash;
+          <%= @event.finished_at.strftime("%d %b %Y") %>
+        </small>
       </h1>
     </div>
   </div>
