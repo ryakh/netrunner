@@ -26,10 +26,17 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <%= f.select(:first_player_id,
-            options_from_collection_for_select(User.all, "id", "fullname"),
+          <%= f.select(
+            :first_player_id,
+            options_from_collection_for_select(
+              User.all,
+              "id",
+              "fullname",
+              @match.first_player_id
+            ),
             { prompt: "Select player..." },
-            { class: "form-control" }) %>
+            { class: "form-control" }
+          ) %>
         </div>
 
         <div class="panel-body">
@@ -37,10 +44,17 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= f.select(:first_player_corporation_id,
-                    options_from_collection_for_select(Identity.corporations, "id", "name"),
+                  <%= f.select(
+                    :first_player_corporation_id,
+                    options_from_collection_for_select(
+                      Identity.corporations,
+                      "id",
+                      "name",
+                      @match.first_player_corporation_id
+                    ),
                     {},
-                    { class: "form-control" }) %>
+                    { class: "form-control" }
+                  ) %>
                 </div>
               </div>
 
@@ -57,10 +71,17 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= f.select(:first_player_runner_id,
-                    options_from_collection_for_select(Identity.runners, "id", "name"),
+                  <%= f.select(
+                    :first_player_runner_id,
+                    options_from_collection_for_select(
+                      Identity.runners,
+                      "id",
+                      "name",
+                      @match.first_player_runner_id
+                    ),
                     {},
-                    { class: "form-control" }) %>
+                    { class: "form-control" }
+                  ) %>
                 </div>
               </div>
 
@@ -81,10 +102,17 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <%= f.select(:second_player_id,
-            options_from_collection_for_select(User.all, "id", "fullname"),
+          <%= f.select(
+            :second_player_id,
+            options_from_collection_for_select(
+              User.all,
+              "id",
+              "fullname",
+              @match.second_player_id
+            ),
             { prompt: "Select oponent..." },
-            { class: "form-control" }) %>
+            { class: "form-control" }
+          ) %>
         </div>
 
         <div class="panel-body">
@@ -92,10 +120,17 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= f.select(:second_player_corporation_id,
-                    options_from_collection_for_select(Identity.corporations, "id", "name"),
+                  <%= f.select(
+                    :second_player_corporation_id,
+                    options_from_collection_for_select(
+                      Identity.corporations,
+                      "id",
+                      "name",
+                      @match.second_player_corporation_id
+                    ),
                     {},
-                    { class: "form-control" }) %>
+                    { class: "form-control" }
+                  ) %>
                 </div>
               </div>
 
@@ -112,10 +147,17 @@
             <div class="row">
               <div class="col-md-9">
                 <div class="form-group">
-                  <%= f.select(:second_player_runner_id,
-                    options_from_collection_for_select(Identity.runners, "id", "name"),
+                  <%= f.select(
+                    :second_player_runner_id,
+                    options_from_collection_for_select(
+                      Identity.runners,
+                      "id",
+                      "name",
+                      @match.second_player_runner_id
+                    ),
                     {},
-                    { class: "form-control" }) %>
+                    { class: "form-control" }
+                  ) %>
                 </div>
               </div>
 
@@ -134,7 +176,7 @@
 
   <div class="row">
     <div class="col-md-12">
-      <%= f.submit "Submit match result", class: "btn btn-success btn-block" %>
+      <%= f.submit class: "btn btn-success btn-block" %>
     </div>
   </div>
 <% end %>

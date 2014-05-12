@@ -75,9 +75,9 @@
     </h5>
 
     <div class="btn-group">
-      <a class="btn btn-default btn-sm" href="">
+      <%= link_to edit_match_path(match.id), class: "btn btn-default btn-sm" do %>
         <span class="glyphicon glyphicon-pencil"></span>
-      </a>
+    <% end %>
 
       <a class="btn btn-danger btn-sm" href="">
         <span class="glyphicon glyphicon-trash"></span>

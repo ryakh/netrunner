@@ -1,6 +1,17 @@
-<h1>Editing match</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Editing Match</h1>
 
-<%= render 'form' %>
+      <%= render 'form' %>
+    </div>
+  </div>
 
-<%= link_to 'Show', @match %> |
-<%= link_to 'Back', matches_path %>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to "Back to event", event_path(@match.event) %>
+    </div>
+  </div>
+</div>
