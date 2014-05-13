@@ -23,10 +23,12 @@ class Event < ActiveRecord::Base
   end
 
   def self.create_current
-    Event.create(
-      started_at:  Time.current.beginning_of_week,
-      finished_at: Time.current.end_of_week
-    )
+    if Season.is_running?
+      Event.create(
+        started_at:  Time.current.beginning_of_week,
+        finished_at: Time.current.end_of_week
+      )
+    end
   end
 
   private

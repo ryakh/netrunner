@@ -1,10 +1,10 @@
 class MatchValidator < ActiveModel::Validator
   def validate(record)
     validate_match_summary_for(record)
-    validate_players(record)
-    validate_score(record)
-    validate_date_of_match(record)
-    check_if_event_is_rated(record)
+    validate_players_for(record)
+    validate_score_for(record)
+    validate_date_of_match_for(record)
+    check_if_event_is_rated_for(record)
   end
 
   private
@@ -19,7 +19,7 @@ class MatchValidator < ActiveModel::Validator
       end
     end
 
-    def validate_players(record)
+    def validate_players_for(record)
       unless record.first_player.nil? || record.second_player_id.nil?
         if record.first_player_id == record.second_player_id
           record.errors[:base] << 'You can not play with yourself, DOH!'
@@ -27,7 +27,7 @@ class MatchValidator < ActiveModel::Validator
       end
     end
 
-    def validate_score(record)
+    def validate_score_for(record)
       unless record.match_points.include?(nil)
         result = record.match_points
         result.delete(10)
@@ -39,20 +39,20 @@ class MatchValidator < ActiveModel::Validator
       end
     end
 
-    def validate_date_of_match(record)
+    def validate_date_of_match_for(record)
       if record.played_on > Time.current
         record.errors[:base] << 'You can not submit a match from the future'
       end
     end
 
-    def check_if_event_is_closed(record)
+    def check_if_event_is_closed_for(record)
       if record.event && record.event.is_closed
         record.errors[:base] << 'Event was cosed; you can not submit any new
                                  matched to it'
       end
     end
 
-    def check_if_event_is_rated(record)
+    def check_if_event_is_rated_for(record)
       if record.event && record.event.is_rated
         record.errors[:base] << 'Event was already rated; you can not submit any
                                  new matches to it'

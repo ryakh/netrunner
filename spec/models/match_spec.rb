@@ -5,6 +5,8 @@ describe Match do
 
   describe 'creation' do
     it 'create event if there is no unclosed event running' do
+      create(:season)
+
       expect {
         create(:match)
       }.to change(Event, :count).by(1)

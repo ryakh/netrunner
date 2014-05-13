@@ -5,6 +5,10 @@ describe MatchesController do
   let(:valid_attributes) { attributes_for(:match) }
   let(:date) { Time.current.strftime('%d-%m-%Y') }
 
+  before(:each) do
+    create(:season)
+  end
+
   sign_in_user('user')
 
   describe 'GET new' do
