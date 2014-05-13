@@ -102,7 +102,7 @@ end
 season = Season.create(name: 'Season 4', is_active: false)
 Season.create(name: 'Season 5', is_active: true)
 
-csv_text = File.read('db/seeds/season4.csv')
+csv_text = File.read('db/seeds/season_4.csv')
 csv = CSV.parse(csv_text, headers: false)
 csv.each do |row|
   match = row[0].split(';')
