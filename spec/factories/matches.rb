@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :match do
-    played_on                Time.now
+    played_on                Time.current.strftime('%d-%m-%Y')
 
     first_player_corporation_points  10
     first_player_runner_points       10

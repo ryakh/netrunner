@@ -22,8 +22,8 @@ class EventsController < ApplicationController
 
     def get_or_create_event
       event = Event.find_by(
-        started_at: Time.now.beginning_of_week,
-        finished_at: Time.now.end_of_week
+        started_at:  Time.current.beginning_of_week,
+        finished_at: Time.current.end_of_week
       )
 
       if event.nil?

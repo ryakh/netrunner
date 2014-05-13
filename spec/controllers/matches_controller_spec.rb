@@ -3,6 +3,7 @@ require 'spec_helper'
 describe MatchesController do
   let(:match) { create(:match) }
   let(:valid_attributes) { attributes_for(:match) }
+  let(:date) { Time.current.strftime('%d-%m-%Y') }
 
   sign_in_user('user')
 
@@ -87,9 +88,9 @@ describe MatchesController do
       it 'updates the requested match' do
         Match.any_instance.
           should_receive(:update).
-          with({ 'played_on' => '2014-05-02' })
+          with({ 'played_on' => date })
 
-        put :update, { id: match.to_param, match: { 'played_on' => '2014-05-02' }}
+        put :update, { id: match.to_param, match: { 'played_on' => date }}
       end
 
       it 'assigns the requested match as @match' do
@@ -112,9 +113,9 @@ describe MatchesController do
 
         Match.any_instance.
           should_receive(:update).
-          with({ 'played_on' => '2014-05-02' })
+          with({ 'played_on' => date })
 
-        put :update, { id: match.to_param, match: { 'played_on' => '2014-05-02' }}
+        put :update, { id: match.to_param, match: { 'played_on' => date }}
       end
 
       it 'assigns the requested match as @match' do

@@ -8,7 +8,7 @@ class Match < ActiveRecord::Base
     :second_player_corporation_points,
     :second_player_runner_points, presence: true
 
-  validates_with MatchPointsValidator
+  validates_with MatchValidator
 
   belongs_to :first_player,              class_name: 'User'
   belongs_to :second_player,             class_name: 'User'
@@ -48,9 +48,7 @@ class Match < ActiveRecord::Base
     end
 
     def no_active_event?
-      if Event.current.nil?
-        return true
-      end
+      Event.current.nil?
     end
 
     def set_event

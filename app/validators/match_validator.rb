@@ -1,8 +1,10 @@
-class MatchPointsValidator < ActiveModel::Validator
+class MatchValidator < ActiveModel::Validator
   def validate(record)
     validate_match_summary_for(record)
     validate_players(record)
     validate_score(record)
+    validate_date_of_match(record)
+    check_if_event_is_rated(record)
   end
 
   private
@@ -34,6 +36,26 @@ class MatchPointsValidator < ActiveModel::Validator
           record.errors[:base] << 'The result you have entered is a total
                                    bullshit; please re-evaluate it'
         end
+      end
+    end
+
+    def validate_date_of_match(record)
+      if record.played_on > Time.current
+        record.errors[:base] << 'You can not submit a match from the future'
+      end
+    end
+
+    def check_if_event_is_closed(record)
+      if record.event && record.event.is_closed
+        record.errors[:base] << 'Event was cosed; you can not submit any new
+                                 matched to it'
+      end
+    end
+
+    def check_if_event_is_rated(record)
+      if record.event && record.event.is_rated
+        record.errors[:base] << 'Event was already rated; you can not submit any
+                                 new matches to it'
       end
     end
 end

@@ -19,7 +19,8 @@ describe Match do
     end
 
     it 'sets match event before creation' do
-      event = create(:event)
+      event = Event.create_current
+      create(:match)
       expect(match.event).to eq(event)
     end
 
@@ -149,6 +150,23 @@ describe Match do
             second_player_runner_points:      7
           )
         }.to raise_error
+      end
+
+      it 'expects tha date on which match was played not to be in the future' do
+        expect {
+          create(
+            :match,
+            played_on: Time.current + 1.week
+          )
+        }.to raise_error
+      end
+
+      it 'expects event not to be rated' do
+        pending
+      end
+
+      it 'expects event not to be closed' do
+        pending
       end
     end
   end
