@@ -3,6 +3,21 @@ class Event < ActiveRecord::Base
 
   has_many :matches
 
+  before_create :set_season, if: Proc.new { |e| Season.is_running? }
+
+  def self.weekly_setup
+    if Season.is_running?
+      finish_date = Event.current.finished_at
+
+      close_current_week
+      start_new_week(finish_date)
+    end
+  end
+
+  def close
+    update_attribute(:is_closed, true)
+  end
+
   def self.current
     Event.find_by(is_closed: false)
   end
@@ -10,8 +25,23 @@ class Event < ActiveRecord::Base
   def self.create_current
     Event.create(
       started_at:  Time.current.beginning_of_week,
-      finished_at: Time.current.end_of_week,
-      season:      Season.find_by(is_active: true)
+      finished_at: Time.current.end_of_week
     )
   end
+
+  private
+    def self.close_current_week
+      Event.current.close
+    end
+
+    def self.start_new_week(previous_week)
+      Event.create(
+        started_at:  previous_week.next_week.beginning_of_week,
+        finished_at: previous_week.next_week.end_of_week
+      )
+    end
+
+    def set_season
+      self.season = Season.current
+    end
 end
