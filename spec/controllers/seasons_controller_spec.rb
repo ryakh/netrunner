@@ -7,10 +7,20 @@ describe SeasonsController do
   let(:season) { create(:season) }
 
   describe 'GET index' do
-    it 'redirects to the latest season' do
-      season = create(:season)
-      get :index
-      expect(response).to redirect_to(season_path(season.id))
+    describe 'with no seasons at all' do
+      it 'will raise not_found error' do
+        expect {
+          get :index
+        }.to raise_error(ActionController::RoutingError)
+      end
+    end
+
+    describe 'with at least one season running' do
+      it 'redirects to the latest season' do
+        season = create(:season)
+        get :index
+        expect(response).to redirect_to(season_path(season.id))
+      end
     end
   end
 

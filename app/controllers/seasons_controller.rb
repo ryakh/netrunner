@@ -4,7 +4,7 @@ class SeasonsController < ApplicationController
   before_action :choke_non_judge, only: [:new, :edit, :create, :update, :destroy]
 
   def index
-    redirect_to_latest_season
+    redirect_to_latest_season_or_rase_not_found
   end
 
   def show
@@ -61,8 +61,13 @@ class SeasonsController < ApplicationController
       params.require(:season).permit(:name, :is_active)
     end
 
-    def redirect_to_latest_season
+    def redirect_to_latest_season_or_rase_not_found
       season = Season.last
-      redirect_to season_path(season.id)
+
+      if season.nil?
+        not_found
+      else
+        redirect_to season_path(season.id)
+      end
     end
 end
