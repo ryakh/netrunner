@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
   has_many :matches
   has_many :standings, as: :rateable
 
-  # before_create :set_season, if: Proc.new { |e| Season.is_running? }
+  before_create :set_season, if: Proc.new { |e| Season.is_running? }
 
   def self.weekly_setup
     if Season.is_running?
