@@ -8,7 +8,12 @@ class EventsController < ApplicationController
 
   def latest
     get_or_create_event
-    redirect_to @event
+
+    if @event.nil?
+      not_found
+    else
+      redirect_to @event
+    end
   end
 
   def calculate

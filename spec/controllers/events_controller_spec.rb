@@ -12,16 +12,28 @@ describe EventsController do
   end
 
   describe 'GET latest' do
-    it 'assigns the requested event as @event' do
-      event = create(:event)
-      get :latest
-      assigns(:event).should eq(event)
+    describe 'when season is running' do
+      before(:each) do
+        create(:season)
+      end
+
+      it 'assigns the requested event as @event' do
+        get :latest
+        assigns(:event).should eq(Event.last)
+      end
+
+      it 'redirects user to the last event' do
+        get :latest
+        response.should redirect_to(Event.last)
+      end
     end
 
-    it 'redirects user to the last event' do
-      event = create(:event)
-      get :latest
-      response.should redirect_to(event)
+    describe 'when there is no season running' do
+      it 'responds with 404' do
+        expect {
+          get :latest
+        }.to raise_error(ActionController::RoutingError)
+      end
     end
   end
 
