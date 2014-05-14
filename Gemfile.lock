@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:ryakh/glicko2.git
+  revision: f61d698c442acc7936a6a261775bafb9936c18fc
+  specs:
+    glicko2 (0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -75,11 +81,11 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    mini_portile (0.5.3)
+    mini_portile (0.6.0)
     minitest (5.3.3)
-    multi_json (1.9.3)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    multi_json (1.10.0)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
     quiet_assets (1.0.2)
@@ -167,6 +173,7 @@ DEPENDENCIES
   devise (= 3.2.4)
   factory_girl_rails (~> 4.4.1)
   faker
+  glicko2!
   jbuilder (~> 1.2)
   jquery-rails
   quiet_assets

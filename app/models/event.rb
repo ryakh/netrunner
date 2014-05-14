@@ -2,8 +2,9 @@ class Event < ActiveRecord::Base
   belongs_to :season
 
   has_many :matches
+  has_many :standings, as: :rateable
 
-  before_create :set_season, if: Proc.new { |e| Season.is_running? }
+  # before_create :set_season, if: Proc.new { |e| Season.is_running? }
 
   def self.weekly_setup
     if Season.is_running?
@@ -12,6 +13,10 @@ class Event < ActiveRecord::Base
       close_current_week
       start_new_week(finish_date)
     end
+  end
+
+  def generate_standings
+    Standing.generate_for_event(self)
   end
 
   def close

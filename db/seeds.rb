@@ -125,3 +125,7 @@ csv.each do |row|
   match.update_attribute(:event_id, event.id)
   match.save
 end
+
+season.events.order('finished_at ASC').each do |event|
+  event.generate_standings
+end

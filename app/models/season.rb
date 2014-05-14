@@ -1,5 +1,6 @@
 class Season < ActiveRecord::Base
   has_many :events
+  has_many :standings, as: :rateable
 
   validates :name, presence: true
 

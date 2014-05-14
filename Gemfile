@@ -28,6 +28,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'whenever', '~> 0.9.2'
+gem 'glicko2', git: 'git@github.com:ryakh/glicko2.git'
 
 group :development, :test do
   gem 'quiet_assets'
