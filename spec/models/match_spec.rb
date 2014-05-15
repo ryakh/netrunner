@@ -130,13 +130,23 @@ describe Match do
         }.to raise_error
       end
 
-      it 'expect match result to contain at least 2 wins' do
+      it 'expect match result to contain exactly 2 wins' do
         expect {
           create(
             :match,
             first_player_corporation_points:  10,
             first_player_runner_points:       9,
             second_player_corporation_points: 5,
+            second_player_runner_points:      0
+          )
+        }.to raise_error
+
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  10,
+            first_player_runner_points:       10,
+            second_player_corporation_points: 10,
             second_player_runner_points:      0
           )
         }.to raise_error
@@ -148,7 +158,7 @@ describe Match do
             :match,
             first_player_corporation_points:  10,
             first_player_runner_points:       10,
-            second_player_corporation_points: 7,
+            second_player_corporation_points: 6,
             second_player_runner_points:      7
           )
         }.to raise_error
@@ -163,12 +173,13 @@ describe Match do
         }.to raise_error
       end
 
-      it 'expects event not to be rated' do
-        pending
-      end
-
       it 'expects event not to be closed' do
-        pending
+        expect {
+          create(
+            :match,
+            is_closed: true
+          )
+        }.to raise_error
       end
     end
   end
