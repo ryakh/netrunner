@@ -17,6 +17,10 @@ class Season < ActiveRecord::Base
     User.where(id: active_users).order('rating DESC')
   end
 
+  def last_event_standings
+    events.last.standings
+  end
+
   def generate_standings
     Standing.generate_for_season(self)
   end

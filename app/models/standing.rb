@@ -4,48 +4,20 @@ class Standing < ActiveRecord::Base
 
   def self.generate_for_event(event)
     users       = set_users_from(event)
-    user_rating = generate_rating_for(users)
+    user_rating = get_rating_for(users)
+    new_rating  = generate_new_rating_from(user_rating, event.matches)
 
-    period = Glicko2::RatingPeriod.from_objs user_rating.values
-
-    event.matches.each do |match|
-      period.game(
-        [
-          user_rating.fetch(match.first_player_id),
-          user_rating.fetch(match.second_player_id)
-        ],
-
-        [
-          match.first_player_league_points,
-          match.second_player_league_points
-        ]
-      )
-    end
-
-    next_period = period.generate_next
-    next_period.players.each { |p| p.update_obj }
-
-    users.each do |u|
-      rating = user_rating.fetch(u.id)
-
-      u.update_attributes(
-        rating:     rating.rating,
-        deviation:  rating.rating_deviation,
-        volatility: rating.volatility
-      )
-
-      Standing.create!(
-        rateable:   event,
-        user:       u,
-        rating:     rating.rating,
-        deviation:  rating.rating_deviation,
-        volatility: rating.volatility
+    users.each do |user|
+      update_user_rating_and_generate_standings(
+        user,
+        new_rating.fetch(user.id),
+        event
       )
     end
   end
 
   def self.generate_for_season(season)
-    season.events.last.standings.each do |s|
+    season.last_event_standings.each do |s|
       Standing.create!(
         rateable:   season,
         user:       s.user,
@@ -70,9 +42,48 @@ class Standing < ActiveRecord::Base
       User.where(id: (current_event_players + past_event_players).flatten.sort.uniq)
     end
 
-    def self.generate_rating_for(users)
+    def self.get_rating_for(users)
       Hash[users.map {
         |u| [ u.id, Rating.new(u.rating, u.deviation, u.volatility) ]
       }]
+    end
+
+    def self.generate_new_rating_from(user_rating, matches)
+      period = Glicko2::RatingPeriod.from_objs user_rating.values
+
+      matches.each do |match|
+        period.game(
+          [
+            user_rating.fetch(match.first_player_id),
+            user_rating.fetch(match.second_player_id)
+          ],
+
+          [
+            match.first_player_league_points,
+            match.second_player_league_points
+          ]
+        )
+      end
+
+      next_period = period.generate_next
+      next_period.players.each { |p| p.update_obj }
+
+      return user_rating
+    end
+
+    def self.update_user_rating_and_generate_standings(user, rating, event)
+      user.update_attributes(
+        rating:     rating.rating,
+        deviation:  rating.rating_deviation,
+        volatility: rating.volatility
+      )
+
+      Standing.create!(
+        rateable:   event,
+        user:       user,
+        rating:     rating.rating,
+        deviation:  rating.rating_deviation,
+        volatility: rating.volatility
+      )
     end
 end
