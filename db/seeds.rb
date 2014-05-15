@@ -99,6 +99,18 @@ class MatchSeeder
   end
 end
 
+seasons = %w(season_3 season_4)
+
+seasons.each do |s|
+  # season = Season.create(name: s.gsub('_', ' ').capitalize, is_active: true)
+
+  csv_text = File.read("db/seeds/#{s}.csv")
+
+  csv = CSV.parse(csv_text, headers: false)
+  csv.each do |row|
+  end
+end
+
 season = Season.create(name: 'Season 4', is_active: true)
 
 csv_text = File.read('db/seeds/season_4.csv')
@@ -128,3 +140,5 @@ end
 season.events.order('finished_at ASC').each do |event|
   event.generate_standings
 end
+
+season.generate_standings

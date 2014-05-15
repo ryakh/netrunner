@@ -44,15 +44,30 @@ class Standing < ActiveRecord::Base
     end
   end
 
+  def self.generate_for_season(season)
+    season.events.last.standings.each do |s|
+      Standing.create!(
+        rateable:   season,
+        user:       s.user,
+        rating:     s.rating,
+        deviation:  s.deviation,
+        volatility: s.volatility
+      )
+    end
+  end
+
   private
     def self.set_users_from(event)
-      player_ids = event.matches.
-        pluck(:first_player_id, :second_player_id).
-        flatten.
-        sort.
-        uniq
+      current_event_players = event.matches.pluck(
+        :first_player_id,
+        :second_player_id
+      )
 
-      User.where(id: player_ids)
+      past_event_players = Standing.where(rateable: event.season.events).pluck(
+        :user_id
+      )
+
+      User.where(id: (current_event_players + past_event_players).flatten.sort.uniq)
     end
 
     def self.generate_rating_for(users)
