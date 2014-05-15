@@ -12,16 +12,13 @@ class Season < ActiveRecord::Base
     !Season.current.nil?
   end
 
-  def active_users
-    active_users = Standing.where(rateable: self.events).pluck(:user_id).uniq
-    User.where(id: active_users).order('rating DESC')
-  end
-
   def last_event_standings
-    events.last.standings
+    events.empty? ? [] : events.last.standings
   end
 
-  def generate_standings
+  def close
     Standing.generate_for_season(self)
+    User.reset_ratings
+    update_attribute(:is_active, false)
   end
 end

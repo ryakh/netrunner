@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   def self.judges
     return User.where(is_judge: true).pluck(:id)
   end
+
+  def self.reset_ratings
+    User.all.update_all(
+      rating:     1500,
+      deviation:  350,
+      volatility: 0.06
+    )
+  end
 end

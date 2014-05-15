@@ -133,6 +133,5 @@ seasons.each do |s|
     event.generate_standings
   end
 
-  season.generate_standings
-  season.update_attribute(:is_active, false)
+  season.close
 end
