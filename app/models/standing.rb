@@ -3,19 +3,8 @@ class Standing < ActiveRecord::Base
   belongs_to :user
 
   def self.generate_for_event(event)
-    player_ids = event.matches.
-      pluck(:first_player_id, :second_player_id).
-      flatten.
-      sort.
-      uniq
-
-    users = User.where(id: player_ids)
-
-    user_rating = {}
-
-    users.each do |u|
-      user_rating[u.id] = Rating.new(u.rating, u.deviation, u.volatility)
-    end
+    users       = set_users_from(event)
+    user_rating = generate_rating_for(users)
 
     period = Glicko2::RatingPeriod.from_objs user_rating.values
 
@@ -54,4 +43,21 @@ class Standing < ActiveRecord::Base
       )
     end
   end
+
+  private
+    def self.set_users_from(event)
+      player_ids = event.matches.
+        pluck(:first_player_id, :second_player_id).
+        flatten.
+        sort.
+        uniq
+
+      User.where(id: player_ids)
+    end
+
+    def self.generate_rating_for(users)
+      Hash[users.map {
+        |u| [ u.id, Rating.new(u.rating, u.deviation, u.volatility) ]
+      }]
+    end
 end

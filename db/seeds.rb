@@ -99,8 +99,7 @@ class MatchSeeder
   end
 end
 
-season = Season.create(name: 'Season 4', is_active: false)
-Season.create(name: 'Season 5', is_active: true)
+season = Season.create(name: 'Season 4', is_active: true)
 
 csv_text = File.read('db/seeds/season_4.csv')
 csv = CSV.parse(csv_text, headers: false)
