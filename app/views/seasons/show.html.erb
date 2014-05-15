@@ -12,8 +12,28 @@
       </div>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-3">
+      <h4>
+        Events
+      </h4>
+
+      <hr>
+
       <%= render @season.events.order('started_at') %>
+    </div>
+
+    <div class="col-md-6">
+      <h4>
+        Standings
+      </h4>
+
+      <hr>
+
+      <% @season.standings.each do |standing| %>
+        <p>
+          <%= standing.fullname %> — <%= standing.rating %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

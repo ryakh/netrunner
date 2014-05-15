@@ -11,4 +11,9 @@ class Season < ActiveRecord::Base
   def self.is_running?
     !Season.current.nil?
   end
+
+  def standings
+    active_users = Standing.where(rateable: events).pluck(:user_id)
+    User.where(id: active_users).order('rating DESC')
+  end
 end
