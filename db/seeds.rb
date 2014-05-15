@@ -102,43 +102,37 @@ end
 seasons = %w(season_3 season_4)
 
 seasons.each do |s|
-  # season = Season.create(name: s.gsub('_', ' ').capitalize, is_active: true)
+  season = Season.create(name: s.gsub('_', ' ').capitalize, is_active: true)
 
   csv_text = File.read("db/seeds/#{s}.csv")
 
   csv = CSV.parse(csv_text, headers: false)
   csv.each do |row|
+    match = row[0].split(';')
+    event = MatchSeeder.set_event(Date::strptime(match[0], '%d/%m/%y'), season)
+
+    match = Match.create(
+      played_on:                        Date::strptime(match[0], '%d/%m/%y'),
+      first_player_id:                  User.find_by(fullname: match[1]).id,
+      second_player_id:                 User.find_by(fullname: match[2]).id,
+      first_player_corporation_id:      Identity.find_by(name: match[3]).id,
+      second_player_runner_id:          Identity.find_by(name: match[4]).id,
+      first_player_corporation_points:  match[5].to_i,
+      second_player_runner_points:      match[6].to_i,
+      first_player_runner_id:           Identity.find_by(name: match[7]).id,
+      second_player_corporation_id:     Identity.find_by(name: match[8]).id,
+      first_player_runner_points:       match[9].to_i,
+      second_player_corporation_points: match[10].to_i
+    )
+
+    match.update_attribute(:event_id, event.id)
+    match.save
   end
+
+  season.events.order('finished_at ASC').each do |event|
+    event.generate_standings
+  end
+
+  season.generate_standings
+  season.update_attribute(:is_active, false)
 end
-
-season = Season.create(name: 'Season 4', is_active: true)
-
-csv_text = File.read('db/seeds/season_4.csv')
-csv = CSV.parse(csv_text, headers: false)
-csv.each do |row|
-  match = row[0].split(';')
-  event = MatchSeeder.set_event(Date::strptime(match[0], '%d/%m/%y'), season)
-
-  match = Match.create(
-    played_on:                        Date::strptime(match[0], '%d/%m/%y'),
-    first_player_id:                  User.find_by(fullname: match[1]).id,
-    second_player_id:                 User.find_by(fullname: match[2]).id,
-    first_player_corporation_id:      Identity.find_by(name: match[3]).id,
-    second_player_runner_id:          Identity.find_by(name: match[4]).id,
-    first_player_corporation_points:  match[5].to_i,
-    second_player_runner_points:      match[6].to_i,
-    first_player_runner_id:           Identity.find_by(name: match[7]).id,
-    second_player_corporation_id:     Identity.find_by(name: match[8]).id,
-    first_player_runner_points:       match[9].to_i,
-    second_player_corporation_points: match[10].to_i
-  )
-
-  match.update_attribute(:event_id, event.id)
-  match.save
-end
-
-season.events.order('finished_at ASC').each do |event|
-  event.generate_standings
-end
-
-season.generate_standings
