@@ -22,4 +22,17 @@ describe Standing do
       expect(create_counter).to eq(20)
     end
   end
+
+  describe 'generation for season' do
+    before(:each) do
+      Standing.generate_for_event(event)
+    end
+
+    it 'will generate standing for each user in season' do
+      create_counter = 0
+      Standing.stub(:create!) { create_counter += 1 }
+      Standing.generate_for_season(event.season)
+      expect(create_counter).to eq(20)
+    end
+  end
 end

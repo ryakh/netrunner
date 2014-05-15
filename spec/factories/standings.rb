@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :standing, :class => 'Standings' do
+  factory :standing do
   end
 end
