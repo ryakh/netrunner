@@ -8,6 +8,14 @@ class Season < ActiveRecord::Base
     Season.find_by(is_active: true)
   end
 
+  def current_standings
+    if is_active
+      Event.current.standings
+    else
+      standings
+    end
+  end
+
   def self.is_running?
     !Season.current.nil?
   end

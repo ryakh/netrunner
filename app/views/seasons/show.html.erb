@@ -55,7 +55,7 @@
         </thead>
 
         <tbody>
-        <% @season.standings.order('rating DESC').each do |standing| %>
+        <% @season.current_standings.order('rating DESC').each do |standing| %>
           <tr>
             <td>
               <%= standing.user.fullname %>
