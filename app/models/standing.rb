@@ -2,6 +2,8 @@ class Standing < ActiveRecord::Base
   belongs_to :rateable, polymorphic: true
   belongs_to :user
 
+  default_scope { order('rating DESC') }
+
   def self.generate_for_event(event)
     users       = set_users_from(event)
     user_rating = get_rating_for(users)
