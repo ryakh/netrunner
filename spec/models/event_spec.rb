@@ -1,12 +1,6 @@
 require 'spec_helper'
 
 describe Event do
-  it 'closes the event' do
-    event = create(:event)
-    event.close
-    expect(event.is_closed).to be_true
-  end
-
   it 'sets season before creating an event' do
     season = create(:season)
     event = create(:event)

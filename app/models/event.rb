@@ -19,10 +19,6 @@ class Event < ActiveRecord::Base
     Standing.generate_for_event(self)
   end
 
-  def close
-    update_attribute(:is_closed, true)
-  end
-
   def self.current
     Event.find_by(is_closed: false)
   end
@@ -38,7 +34,7 @@ class Event < ActiveRecord::Base
 
   private
     def self.close_current_week
-      Event.current.close
+      Event.current.update_attribute(:is_closed, true)
     end
 
     def self.start_new_week(previous_week)
