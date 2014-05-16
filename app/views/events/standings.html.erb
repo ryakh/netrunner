@@ -1,0 +1,33 @@
+<div class="container event">
+  <%= render("event_header") %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <th>Player</th>
+          <th>Rating</th>
+          <th>Deviation</th>
+          <th>Volatility</th>
+          <th>Games</th>
+        </thead>
+
+        <tbody>
+          <% @event.standings.each do |standing| %>
+            <tr>
+              <td><%= standing.user.fullname %></td>
+
+              <td><%= standing.rating.to_i %></td>
+
+              <td><%= standing.deviation.to_i %></td>
+
+              <td><%= number_with_precision(standing.volatility, precision: 6) %></td>
+
+              <td><%= standing.number_of_games %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

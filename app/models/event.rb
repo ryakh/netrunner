@@ -15,6 +15,11 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def calculate
+    update_attribute(:is_rated, true)
+    generate_standings
+  end
+
   def generate_standings
     Standing.generate_for_event(self)
   end

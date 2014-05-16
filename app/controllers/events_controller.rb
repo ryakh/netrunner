@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event,          only: [:show, :calculate]
+  before_action :set_event,          only: [:show, :calculate, :standings, :charts]
   before_action :authenticate_user!, only: [:calculate]
   before_action :choke_non_judge,    only: [:calculate]
 
@@ -18,6 +18,12 @@ class EventsController < ApplicationController
 
   def calculate
     @event.calculate
+  end
+
+  def standings
+  end
+
+  def charts
   end
 
   private

@@ -4,6 +4,8 @@ Netrunner::Application.routes.draw do
   resources :events, only: [:show] do
     get :latest,    on: :collection
     put :calculate, on: :member
+    get :standings, on: :member
+    get :charts,    on: :member
   end
 
   root 'application#index'
