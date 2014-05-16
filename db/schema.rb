@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514082258) do
+ActiveRecord::Schema.define(version: 20140516092127) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140514082258) do
     t.decimal  "volatility"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "number_of_games", default: 0
   end
 
   add_index "standings", ["rateable_id", "rateable_type"], name: "index_standings_on_rateable_id_and_rateable_type"

@@ -29,9 +29,9 @@
 
       <hr>
 
-      <% @season.standings.each do |standing| %>
+      <% @season.standings.order('rating DESC').each do |standing| %>
         <p>
-          <%= standing.fullname %> — <%= standing.rating %>
+        <%= standing.user.fullname %> — <%= standing.rating %> — <%= standing.number_of_games %>
         </p>
       <% end %>
     </div>

@@ -11,7 +11,10 @@ class Standing < ActiveRecord::Base
       update_user_rating_and_generate_standings(
         user,
         new_rating.fetch(user.id),
-        event
+        event,
+        event.matches.where(
+          "first_player_id = ? OR second_player_id = ?", user.id, user.id
+        ).length
       )
     end
   end
@@ -19,11 +22,12 @@ class Standing < ActiveRecord::Base
   def self.generate_for_season(season)
     season.last_event_standings.each do |s|
       Standing.create!(
-        rateable:   season,
-        user:       s.user,
-        rating:     s.rating,
-        deviation:  s.deviation,
-        volatility: s.volatility
+        rateable:        season,
+        user:            s.user,
+        rating:          s.rating,
+        deviation:       s.deviation,
+        volatility:      s.volatility,
+        number_of_games: s.number_of_games
       )
     end
   end
@@ -71,19 +75,21 @@ class Standing < ActiveRecord::Base
       return user_rating
     end
 
-    def self.update_user_rating_and_generate_standings(user, rating, event)
+    def self.update_user_rating_and_generate_standings(user, rating, event, games)
       user.update_attributes(
-        rating:     rating.rating,
-        deviation:  rating.rating_deviation,
-        volatility: rating.volatility
+        rating:          rating.rating,
+        deviation:       rating.rating_deviation,
+        volatility:      rating.volatility,
+        number_of_games: (user.number_of_games + games)
       )
 
       Standing.create!(
-        rateable:   event,
-        user:       user,
-        rating:     rating.rating,
-        deviation:  rating.rating_deviation,
-        volatility: rating.volatility
+        rateable:        event,
+        user:            user,
+        rating:          rating.rating,
+        deviation:       rating.rating_deviation,
+        volatility:      rating.volatility,
+        number_of_games: user.number_of_games
       )
     end
 end

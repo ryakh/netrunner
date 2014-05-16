@@ -10,9 +10,10 @@ class User < ActiveRecord::Base
 
   def self.reset_ratings
     User.all.update_all(
-      rating:     1500,
-      deviation:  350,
-      volatility: 0.06
+      rating:          1500,
+      deviation:       350,
+      volatility:      0.06,
+      number_of_games: 0
     )
   end
 end

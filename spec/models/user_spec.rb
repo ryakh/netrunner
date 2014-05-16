@@ -10,6 +10,7 @@ describe User do
       expect(user.rating.to_f).to eq(1500)
       expect(user.deviation.to_f).to eq(350)
       expect(user.volatility.to_f).to eq(0.06)
+      expect(user.number_of_games.to_f).to eq(0)
     end
   end
 end
