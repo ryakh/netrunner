@@ -6,7 +6,9 @@
           <%= link_to season_path(season.id), class: "list-group-item" do %>
             <%= season.name %>
 
-            <span class="badge">A</span>
+            <% if season.is_active %>
+              <span class="badge">A</span>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -29,11 +31,57 @@
 
       <hr>
 
-      <% @season.standings.order('rating DESC').each do |standing| %>
-        <p>
-        <%= standing.user.fullname %> — <%= standing.rating %> — <%= standing.number_of_games %>
-        </p>
-      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <th>
+            Player
+          </th>
+
+          <th>
+            Rating
+          </th>
+
+          <th>
+            Games
+          </th>
+
+          <th>
+            Deviation
+          </th>
+
+          <th>
+            Volatility
+          </th>
+        </thead>
+
+        <tbody>
+        <% @season.standings.order('rating DESC').each do |standing| %>
+          <tr>
+            <td>
+              <%= standing.user.fullname %>
+            </td>
+
+            <td>
+              <%= number_with_precision(standing.rating, precision: 0) %>
+            </td>
+
+            <td>
+              <%= standing.number_of_games %>
+            </td>
+
+            <td>
+              <%= number_with_precision(standing.deviation, precision: 0) %>
+            </td>
+
+            <td>
+              <%= number_with_precision(standing.volatility, precision: 6) %>
+            </td>
+
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
     </div>
   </div>
 </div>
