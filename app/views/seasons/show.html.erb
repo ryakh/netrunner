@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container season">
   <div class="row">
     <div class="col-md-3">
       <div class="list-group">
-        <% @seasons.each do |season| %>
+        <% @seasons.order('created_at DESC').each do |season| %>
           <%= link_to season_path(season.id), class: "list-group-item" do %>
             <%= season.name %>
 
@@ -14,74 +14,85 @@
       </div>
     </div>
 
-    <div class="col-md-3">
-      <h4>
-        Events
-      </h4>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>
+              <%= @season.name %>
+            </h1>
+          </div>
+        </div>
 
-      <hr>
+        <div class="row">
+          <div class="col-md-4">
+            <h4>
+              Events
+            </h4>
 
-      <%= render @season.events.order('started_at') %>
-    </div>
+            <hr>
 
-    <div class="col-md-6">
-      <h4>
-        Standings
-      </h4>
+            <%= render @season.events.order('started_at') %>
+          </div>
 
-      <hr>
+          <div class="col-md-8">
+            <h4>
+              Standings
+            </h4>
 
-      <table class="table table-striped">
-        <thead>
-          <th>
-            Player
-          </th>
+            <hr>
 
-          <th>
-            Rating
-          </th>
+            <table class="table table-striped">
+              <thead>
+                <th>
+                  Player
+                </th>
 
-          <th>
-            Games
-          </th>
+                <th>
+                  Rating
+                </th>
 
-          <th>
-            Deviation
-          </th>
+                <th>
+                  Games
+                </th>
 
-          <th>
-            Volatility
-          </th>
-        </thead>
+                <th>
+                  Deviation
+                </th>
 
-        <tbody>
-        <% @season.current_standings.each do |standing| %>
-          <tr>
-            <td>
-              <%= standing.user.fullname %>
-            </td>
+                <th>
+                  Volatility
+                </th>
+              </thead>
 
-            <td>
-              <%= number_with_precision(standing.rating, precision: 0) %>
-            </td>
+              <tbody>
+              <% @season.current_standings.each do |standing| %>
+                <tr>
+                  <td>
+                    <%= standing.user.fullname %>
+                  </td>
 
-            <td>
-              <%= standing.number_of_games %>
-            </td>
+                  <td>
+                    <%= number_with_precision(standing.rating, precision: 0) %>
+                  </td>
 
-            <td>
-              <%= number_with_precision(standing.deviation, precision: 0) %>
-            </td>
+                  <td>
+                    <%= standing.number_of_games %>
+                  </td>
 
-            <td>
-              <%= number_with_precision(standing.volatility, precision: 6) %>
-            </td>
+                  <td>
+                    <%= number_with_precision(standing.deviation, precision: 0) %>
+                  </td>
 
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+                  <td>
+                    <%= number_with_precision(standing.volatility, precision: 6) %>
+                  </td>
 
-    </div>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
