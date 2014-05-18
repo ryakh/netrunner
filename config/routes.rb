@@ -14,7 +14,7 @@ Netrunner::Application.routes.draw do
 
   devise_for :users
 
-  resources :users, only: [] do
+  resources :users, only: [:update] do
     get :profile, on: :collection
     put :update,  on: :collection
   end
