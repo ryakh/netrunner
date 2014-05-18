@@ -5,9 +5,15 @@
         <%= event.started_at.strftime("%U").to_i.ordinalize %> week
 
         <small>
-          <%= event.started_at.strftime("%d %b %Y") %> &ndash;
+          <%= event.started_at.strftime("%d %b") %> &ndash;
           <%= event.finished_at.strftime("%d %b %Y") %>
         </small>
+
+        <% if !event.is_closed && !event.is_rated %>
+          <span class="label label-success">Current</span>
+        <% elsif event.is_closed && !event.is_rated %>
+          <span class="label label-warning">Closed</span>
+        <% end %>
       <% end %>
     </h5>
   </div>

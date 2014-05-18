@@ -74,15 +74,19 @@
       <%= match.played_on.strftime("%d.%m.%Y") %>
     </h5>
 
-    <div class="btn-group">
-      <%= link_to edit_match_path(match.id), class: "btn btn-default btn-sm" do %>
-        <span class="glyphicon glyphicon-pencil"></span>
-    <% end %>
+    <% if user_signed_in? %>
+      <% if current_user.is_judge || current_user.id.eql?(match.first_player_id) || current_user.id.eql?(match.second_player_id) %>
+      <div class="btn-group">
+        <%= link_to edit_match_path(match.id), class: "btn btn-default btn-sm" do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <% end %>
 
-      <a class="btn btn-danger btn-sm" href="">
-        <span class="glyphicon glyphicon-trash"></span>
-      </a>
-    </div>
+        <a class="btn btn-danger btn-sm" href="">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+      </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
 
   before_create :set_season, if: Proc.new { |e| Season.is_running? }
 
+  default_scope { order('finished_at DESC') }
+
   def self.weekly_setup
     if Season.is_running?
       finish_date = Event.current.finished_at

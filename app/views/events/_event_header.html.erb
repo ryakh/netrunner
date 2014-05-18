@@ -9,6 +9,7 @@
       </small>
     </h1>
 
+
     <div class="subnav">
       <hr>
 
@@ -32,6 +33,16 @@
     </div>
   </div>
 </div>
+
+<% if user_signed_in? %>
+<div class="row new-match">
+  <div class="col-md-12">
+    <%= link_to "Submit Match Result",
+      new_match_path,
+      class: "button btn-primary btn-lg btn-block text-center" %>
+  </div>
+</div>
+<% end %>
 
 <div class="row">
   <div class="col-md-12">
