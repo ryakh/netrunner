@@ -45,7 +45,12 @@
           </li>
         <% else %>
           <li>
-            <%= link_to "Sign Out (#{current_user.fullname})",
+            <%= link_to "Edit profile (#{current_user.fullname})",
+              profile_users_path %>
+          </li>
+
+          <li>
+            <%= link_to "Sign Out",
               destroy_user_session_path,
               method: :delete %>
           </li>
