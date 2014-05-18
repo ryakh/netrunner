@@ -17,6 +17,7 @@
           <%= link_to "← Back to season", season_path(@event.season) %>
         </li>
 
+        <% if @event.is_closed && !@event.is_rated %>
         <li>|</li>
 
         <li>
@@ -24,6 +25,7 @@
             calculate_event_path(@event),
             method: :put %>
         </li>
+        <% end %>
       </ul>
 
       <hr>

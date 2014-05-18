@@ -16,8 +16,10 @@ class Event < ActiveRecord::Base
   end
 
   def calculate
-    update_attribute(:is_rated, true)
-    generate_standings
+    unless is_rated
+      update_attribute(:is_rated, true)
+      generate_standings
+    end
   end
 
   def generate_standings
