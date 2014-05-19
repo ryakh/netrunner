@@ -40,6 +40,10 @@ group :development, :test do
   gem 'capistrano', '~> 3.2.0'
 end
 
+group :production do
+  gem 'mysql2'
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
