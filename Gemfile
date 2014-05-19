@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'whenever', '~> 0.9.2'
 gem 'glicko2', git: 'git@github.com:ryakh/glicko2.git'
 
-gem 'dotenv-rails'
+gem 'figaro'
 
 group :development, :test do
   gem 'quiet_assets'
