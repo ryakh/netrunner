@@ -37,6 +37,7 @@ group :development, :test do
   gem 'faker'
   gem 'capybara', '2.2.1'
   gem 'sqlite3'
+  gem 'capistrano', '~> 3.2.0'
 end
 
 group :doc do
