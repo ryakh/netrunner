@@ -17,6 +17,4 @@
 
 .DS_Store
 
-*.lock
-
 .env
