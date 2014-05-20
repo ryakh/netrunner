@@ -5,6 +5,7 @@ describe Standing do
 
   before(:each) do
     create(:season)
+    create(:event)
   end
 
   describe 'generation for event' do

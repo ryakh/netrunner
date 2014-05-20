@@ -21,7 +21,7 @@ class Season < ActiveRecord::Base
   end
 
   def last_event_standings
-    events.empty? ? [] : events.last.standings
+    events.empty? ? [] : events.first.standings
   end
 
   def close

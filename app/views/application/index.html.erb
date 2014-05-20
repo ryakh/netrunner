@@ -42,20 +42,13 @@
           <tr>
             <th>Player</th>
             <th>Rating</th>
+            <th>Games</th>
             <th>Deviation</th>
-            <th>Volatility</th>
           </tr>
         </thead>
 
         <tbody>
-        <% @standings.each do |standing| %>
-          <tr>
-            <td><%= standing.user.fullname %></td>
-            <td><%= standing.rating %></td>
-            <td><%= standing.deviation %></td>
-            <td><%= standing.volatility %></td>
-          </tr>
-        <% end %>
+          <%= render @standings %>
         </tbody>
        </table>
     </div>

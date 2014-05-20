@@ -51,6 +51,10 @@ describe MatchesController do
   end
 
   describe 'POST create' do
+    before(:each) do
+      create(:event)
+    end
+
     describe 'with valid params' do
       it 'creates a new Match' do
         expect {
@@ -86,6 +90,10 @@ describe MatchesController do
   end
 
   describe 'PUT update' do
+    before(:each) do
+      create(:event)
+    end
+
     describe 'signed in as judge' do
       sign_in_user('judge')
 
@@ -159,6 +167,10 @@ describe MatchesController do
   end
 
   describe 'DELETE destroy' do
+    before(:each) do
+      create(:event)
+    end
+
     describe 'signed in as judge' do
       sign_in_user('judge')
 

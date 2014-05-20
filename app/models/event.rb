@@ -19,9 +19,13 @@ class Event < ActiveRecord::Base
 
   def calculate
     unless is_rated
-      update_attribute(:is_rated, true)
       Standing.generate_for_event(self)
+      update_attribute(:is_rated, true)
     end
+  end
+
+  def self.is_running?
+    !Event.current.nil?
   end
 
   def self.current

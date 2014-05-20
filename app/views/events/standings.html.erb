@@ -7,25 +7,12 @@
         <thead>
           <th>Player</th>
           <th>Rating</th>
-          <th>Deviation</th>
-          <th>Volatility</th>
           <th>Games</th>
+          <th>Deviation</th>
         </thead>
 
         <tbody>
-          <% @event.standings.each do |standing| %>
-            <tr>
-              <td><%= standing.user.fullname %></td>
-
-              <td><%= standing.rating.to_i %></td>
-
-              <td><%= standing.deviation.to_i %></td>
-
-              <td><%= number_with_precision(standing.volatility, precision: 6) %></td>
-
-              <td><%= standing.number_of_games %></td>
-            </tr>
-          <% end %>
+          <%= render @event.standings %>
         </tbody>
       </table>
     </div>

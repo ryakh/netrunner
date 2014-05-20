@@ -20,7 +20,6 @@ class Match < ActiveRecord::Base
 
   belongs_to :event
 
-  before_create :create_new_event, if: :no_active_event?
   before_create :set_event, :calculate_league_points
 
   def match_points
@@ -43,14 +42,6 @@ class Match < ActiveRecord::Base
   end
 
   private
-    def create_new_event
-      Event.create_current
-    end
-
-    def no_active_event?
-      Event.current.nil?
-    end
-
     def set_event
       self.event = Event.current
     end
