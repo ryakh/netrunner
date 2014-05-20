@@ -48,12 +48,12 @@
         </thead>
 
         <tbody>
-        <% User.all.each do |user| %>
+        <% @standings.each do |standing| %>
           <tr>
-            <td><%= user.fullname %></td>
-            <td><%= user.rating %></td>
-            <td><%= user.deviation %></td>
-            <td><%= user.volatility %></td>
+            <td><%= standing.user.fullname %></td>
+            <td><%= standing.rating %></td>
+            <td><%= standing.deviation %></td>
+            <td><%= standing.volatility %></td>
           </tr>
         <% end %>
         </tbody>
