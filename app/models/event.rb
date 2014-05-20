@@ -20,12 +20,8 @@ class Event < ActiveRecord::Base
   def calculate
     unless is_rated
       update_attribute(:is_rated, true)
-      generate_standings
+      Standing.generate_for_event(self)
     end
-  end
-
-  def generate_standings
-    Standing.generate_for_event(self)
   end
 
   def self.current

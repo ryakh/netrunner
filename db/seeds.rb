@@ -132,7 +132,7 @@ seasons.each do |s|
   end
 
   season.events.order('finished_at ASC').each do |event|
-    event.generate_standings
+    event.calculate
   end
 
   season.close
