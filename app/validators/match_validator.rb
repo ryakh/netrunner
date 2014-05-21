@@ -32,7 +32,7 @@ class MatchValidator < ActiveModel::Validator
         result = record.match_points
         result.delete(10)
 
-        if record.match_points.count(10) != 2 || result.inject(:+) > 12
+        if record.match_points.count(10) != 2 || result.inject(:+) > 12 || score_invalid?(record.match_points)
           record.errors[:base] << 'The result you have entered is a total
                                    bullshit; please re-evaluate it'
         end
@@ -49,6 +49,17 @@ class MatchValidator < ActiveModel::Validator
       if record.event && record.event.is_closed
         record.errors[:base] << 'Event was cosed; you can not submit any new
                                  matched to it'
+      end
+    end
+
+  protected
+    def score_invalid?(result)
+      winning_pairs = result.each_index.select{ |i| result[i] == 10 }
+
+      if winning_pairs == [0,3] || winning_pairs == [1,2]
+        return true
+      else
+        return false
       end
     end
 end

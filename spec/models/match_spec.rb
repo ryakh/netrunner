@@ -16,8 +16,8 @@ describe Match do
           :match,
           first_player_corporation_points:  10,
           first_player_runner_points:       4,
-          second_player_corporation_points: 4,
-          second_player_runner_points:      10
+          second_player_corporation_points: 10,
+          second_player_runner_points:      4
         )
 
         expect(event.first_player_league_points).to eq(3)
@@ -162,6 +162,28 @@ describe Match do
           create(
             :match,
             is_closed: true
+          )
+        }.to raise_error
+      end
+
+      it 'expects match to have valid score distribution' do
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  10,
+            first_player_runner_points:       1,
+            second_player_corporation_points: 6,
+            second_player_runner_points:      10
+          )
+        }.to raise_error
+
+        expect {
+          create(
+            :match,
+            first_player_corporation_points:  1,
+            first_player_runner_points:       10,
+            second_player_corporation_points: 10,
+            second_player_runner_points:      7
           )
         }.to raise_error
       end
