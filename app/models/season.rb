@@ -10,7 +10,7 @@ class Season < ActiveRecord::Base
 
   def current_standings
     if is_active
-      Event.current.standings
+      Event.first.standings
     else
       standings
     end

@@ -41,29 +41,35 @@
 
             <hr>
 
-            <table class="table table-striped">
-              <thead>
-                <th>
-                  Player
-                </th>
+            <% if @season.current_standings.empty? %>
+              <h5>
+                Standing will be available soon
+              </h5>
+            <% else %>
+              <table class="table table-striped">
+                <thead>
+                  <th>
+                    Player
+                  </th>
 
-                <th>
-                  Rating
-                </th>
+                  <th>
+                    Rating
+                  </th>
 
-                <th>
-                  Games
-                </th>
+                  <th>
+                    Games
+                  </th>
 
-                <th>
-                  Deviation
-                </th>
-              </thead>
+                  <th>
+                    Deviation
+                  </th>
+                </thead>
 
-              <tbody>
-                <%= render @season.current_standings %>
-              </tbody>
-            </table>
+                <tbody>
+                  <%= render @season.current_standings %>
+                </tbody>
+              </table>
+            <% end %>
           </div>
         </div>
       </div>

@@ -18,6 +18,8 @@ class EventsController < ApplicationController
 
   def calculate
     @event.calculate
+
+    redirect_to @event.season
   end
 
   def standings
