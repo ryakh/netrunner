@@ -43,7 +43,11 @@ class Event < ActiveRecord::Base
 
   private
     def self.close_current_week
-      Event.current.update_attribute(:is_closed, true)
+      if Event.matches.length.eql?(0)
+        Event.current.destroy
+      else
+        Event.current.update_attribute(:is_closed, true)
+      end
     end
 
     def self.start_new_week(previous_week)
