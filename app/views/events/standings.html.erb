@@ -1,6 +1,7 @@
 <div class="container event">
   <%= render("event_header") %>
 
+  <% if @event.is_rated %>
   <div class="row">
     <div class="col-md-12">
       <table class="table table-striped">
@@ -17,4 +18,9 @@
       </table>
     </div>
   </div>
+  <% else %>
+    <h1>
+      Event is still running; come back later
+    </h1>
+  <% end %>
 </div>

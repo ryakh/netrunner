@@ -1,10 +1,19 @@
 <div class="container event">
   <%= render("event_header") %>
 
-
-  <div class="row">
-    <div class="col-md-12">
-      <%= render @event.matches %>
+  <% if @event.matches.empty? %>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+          No games were played this week
+        </h1>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <%= render @event.matches %>
+      </div>
+    </div>
+  <% end %>
 </div>
