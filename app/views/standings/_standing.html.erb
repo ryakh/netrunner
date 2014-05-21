@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= standing.user.fullname %>
+  </td>
+
+  <td>
+    <%= number_with_precision(standing.rating, precision: 0) %>
+  </td>
+
+  <td>
+    <%= standing.number_of_games %>
+  </td>
+
+  <td>
+    <%= number_with_precision(standing.deviation, precision: 0) %>
+  </td>
+</tr>
