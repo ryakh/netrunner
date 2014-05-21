@@ -46,12 +46,12 @@
 
 <div class="row">
   <div class="col-md-12">
-    <ul class="nav nav-tabs">
-      <li>
+    <ul class="nav nav-tabs" data-overview-navigation>
+      <li data-overview>
         <%= link_to "Overview", event_path(@event) %>
       </li>
 
-      <li>
+      <li data-standings>
         <%= link_to "Standings", standings_event_path(@event) %>
       </li>
 
