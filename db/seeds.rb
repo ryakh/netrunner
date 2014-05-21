@@ -103,14 +103,12 @@ seasons = %w(season_1 season_2 season_3 season_4)
 
 seasons.each do |s|
   season = Season.create(name: s.gsub('_', ' ').capitalize, is_active: true)
-  puts "Creating #{s}"
 
   csv_text = File.read("db/seeds/#{s}.csv")
 
   csv = CSV.parse(csv_text, headers: false)
   csv.each do |row|
     match = row[0].split(';')
-    puts "Creating match: #{row}"
     event = MatchSeeder.set_event(Date::strptime(match[0], '%d/%m/%y'), season)
 
     match = Match.create(
@@ -131,10 +129,10 @@ seasons.each do |s|
     match.save
   end
 
-  season.events.order('finished_at ASC').each do |event|
+  season.events.unscoped.order('finished_at ASC').each do |event|
+    event.update_attribute(:is_closed, true)
     event.calculate
   end
 
   season.close
-  puts "========================================"
 end
