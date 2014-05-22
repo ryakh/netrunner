@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def index
-    @standings = Season.last.current_standings
+    if Season.last
+      @standings = Season.last.current_standings
+    else
+      @standings = []
+    end
   end
 
   private

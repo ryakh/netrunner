@@ -64,7 +64,8 @@ users = [
   { fullname: 'Brano',    email: 'brano@netrunner.io' },
   { fullname: 'Laco',     email: 'laco@netrunner.io' },
   { fullname: 'Celo',     email: 'celo@netrunner.io' },
-  { fullname: 'Veronika', email: 'veronika@netrunner.io' }
+  { fullname: 'Veronika', email: 'veronika@netrunner.io' },
+  { fullname: 'Juraj',    email: 'juraj@netrunner.io' }
 ]
 
 identities.each do |identity|
@@ -99,7 +100,7 @@ class MatchSeeder
   end
 end
 
-seasons = %w(season_1 season_2 season_3 season_4)
+seasons = %w(season_1 season_2 season_3 season_4 season_5)
 
 seasons.each do |s|
   season = Season.create(name: s.gsub('_', ' ').capitalize, is_active: true)
@@ -134,5 +135,9 @@ seasons.each do |s|
     event.calculate
   end
 
-  season.close
+  if season.name == 'Season 5'
+    Event.create_current
+  else
+    season.close
+  end
 end
