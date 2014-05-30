@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516092127) do
+ActiveRecord::Schema.define(version: 20140530122819) do
 
   create_table "events", force: true do |t|
     t.datetime "started_at"
@@ -80,37 +80,37 @@ ActiveRecord::Schema.define(version: 20140516092127) do
     t.integer  "rateable_id"
     t.string   "rateable_type"
     t.integer  "user_id"
-    t.decimal  "rating"
-    t.decimal  "deviation"
-    t.decimal  "volatility"
+    t.decimal  "rating",          precision: 5, scale: 11
+    t.decimal  "deviation",       precision: 5, scale: 11
+    t.decimal  "volatility",      precision: 5, scale: 11
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "number_of_games", default: 0
+    t.integer  "number_of_games",                          default: 0
   end
 
   add_index "standings", ["rateable_id", "rateable_type"], name: "index_standings_on_rateable_id_and_rateable_type"
   add_index "standings", ["user_id"], name: "index_standings_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "fullname",               default: "",     null: false
-    t.string   "email",                  default: "",     null: false
-    t.string   "encrypted_password",     default: "",     null: false
+    t.string   "fullname",                                        default: "",     null: false
+    t.string   "email",                                           default: "",     null: false
+    t.string   "encrypted_password",                              default: "",     null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,      null: false
+    t.integer  "sign_in_count",                                   default: 0,      null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "number_of_games",        default: 0,      null: false
-    t.decimal  "rating",                 default: 1500.0, null: false
-    t.decimal  "deviation",              default: 350.0,  null: false
-    t.decimal  "volatility",             default: 0.06,   null: false
-    t.string   "country",                default: "",     null: false
+    t.integer  "number_of_games",                                 default: 0,      null: false
+    t.decimal  "rating",                 precision: 5, scale: 11, default: 1500.0, null: false
+    t.decimal  "deviation",              precision: 5, scale: 11, default: 350.0,  null: false
+    t.decimal  "volatility",             precision: 5, scale: 11, default: 0.06,   null: false
+    t.string   "country",                                         default: "",     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_judge",               default: false
+    t.boolean  "is_judge",                                        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
