@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
 
   def self.reset_ratings
     User.all.update_all(
-      rating:          1500,
-      deviation:       350,
-      volatility:      0.06,
+      rating:          1500.00000000000,
+      deviation:       350.00000000000,
+      volatility:      0.06000000000,
       number_of_games: 0
     )
   end
@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   private
     def set_default_rating
       update_attributes(
-        rating:          1500,
-        deviation:       350,
-        volatility:      0.06,
+        rating:          1500.00000000000,
+        deviation:       350.00000000000,
+        volatility:      0.06000000000,
         number_of_games: 0
       )
     end
