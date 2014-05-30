@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_create :set_default_rating
+
   def self.judges
     return User.where(is_judge: true).pluck(:id)
   end
@@ -16,4 +18,14 @@ class User < ActiveRecord::Base
       number_of_games: 0
     )
   end
+
+  private
+    def set_default_rating
+      update_attributes(
+        rating:          1500,
+        deviation:       350,
+        volatility:      0.06,
+        number_of_games: 0
+      )
+    end
 end

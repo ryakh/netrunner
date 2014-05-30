@@ -92,25 +92,25 @@ ActiveRecord::Schema.define(version: 20140530122819) do
   add_index "standings", ["user_id"], name: "index_standings_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "fullname",                                         default: "",     null: false
-    t.string   "email",                                            default: "",     null: false
-    t.string   "encrypted_password",                               default: "",     null: false
+    t.string   "fullname",                                         default: "",    null: false
+    t.string   "email",                                            default: "",    null: false
+    t.string   "encrypted_password",                               default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                                    default: 0,      null: false
+    t.integer  "sign_in_count",                                    default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "number_of_games",                                  default: 0,      null: false
-    t.decimal  "rating",                 precision: 11, scale: 11, default: 1500.0, null: false
-    t.decimal  "deviation",              precision: 11, scale: 11, default: 350.0,  null: false
-    t.decimal  "volatility",             precision: 11, scale: 11, default: 0.06,   null: false
-    t.string   "country",                                          default: "",     null: false
+    t.integer  "number_of_games",                                  default: 0,     null: false
+    t.string   "country",                                          default: "",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_judge",                                         default: false
+    t.decimal  "rating",                 precision: 11, scale: 11
+    t.decimal  "deviation",              precision: 11, scale: 11
+    t.decimal  "volatility",             precision: 11, scale: 11
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
