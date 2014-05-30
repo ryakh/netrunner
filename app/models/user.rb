@@ -22,9 +22,9 @@ class User < ActiveRecord::Base
   private
     def set_default_rating
       update_attributes(
-        rating:          1500.00000000000,
-        deviation:       350.00000000000,
-        volatility:      0.06000000000,
+        rating:          BigDecimal.new(1500),
+        deviation:       BigDecimal.new(350),
+        volatility:      BigDecimal.new(0.06),
         number_of_games: 0
       )
     end
