@@ -3,14 +3,6 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def index
-    if Season.last
-      @standings = Season.last.current_standings
-    else
-      @standings = []
-    end
-  end
-
   private
     def choke_non_judge
       unless current_user.is_judge

@@ -3,6 +3,14 @@ class SeasonsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
   before_action :choke_non_judge, only: [:new, :edit, :create, :update, :destroy]
 
+  def current_standings
+    if Season.last
+      @standings = Season.last.current_standings
+    else
+      @standings = []
+    end
+  end
+
   def index
     redirect_to_latest_season_or_rase_not_found
   end

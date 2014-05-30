@@ -8,7 +8,7 @@ Netrunner::Application.routes.draw do
     get :charts,    on: :member
   end
 
-  root 'application#index'
+  root 'seasons#current_standings'
 
   resources :seasons
 

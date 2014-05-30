@@ -10,7 +10,7 @@ describe Event do
   describe 'weekly setup' do
     describe 'with a season running' do
       before(:each) do
-        create(:season)
+        create(:season, is_active: true)
         create(:event)
       end
 
@@ -19,10 +19,17 @@ describe Event do
         Event.weekly_setup
       end
 
-      it 'starts new event' do
+      it 'deletes event with no matches' do
         expect {
-          Event.weekly_setup
-        }.to change(Event, :count).by(1)
+          Event.send(:close_current_week)
+        }.to change(Event, :count).by(-1)
+      end
+
+      it 'closes event with matches played' do
+        create(:event)
+        create(:match)
+        Event.send(:close_current_week)
+        expect(Event.first.is_closed).to be_true
       end
 
       it 'triggers start_new_week method' do

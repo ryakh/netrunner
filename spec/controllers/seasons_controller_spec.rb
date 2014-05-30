@@ -6,6 +6,15 @@ describe SeasonsController do
 
   let(:season) { create(:season) }
 
+  describe 'GET current_standings' do
+    it 'returns success' do
+      create(:season)
+      create(:event)
+      get :current_standings
+      expect(response).to be_success
+    end
+  end
+
   describe 'GET index' do
     describe 'with no seasons at all' do
       it 'will raise not_found error' do
