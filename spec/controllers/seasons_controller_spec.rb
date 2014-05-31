@@ -9,7 +9,10 @@ describe SeasonsController do
   describe 'GET current_standings' do
     it 'returns success' do
       create(:season)
-      create(:event)
+      event = create(:event)
+      create(:match)
+      event.update_attribute(:is_closed, true)
+      event.calculate
       get :current_standings
       expect(response).to be_success
     end

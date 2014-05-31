@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 20140530122819) do
     t.integer  "rateable_id"
     t.string   "rateable_type"
     t.integer  "user_id"
-    t.decimal  "rating",          precision: 11, scale: 11
-    t.decimal  "deviation",       precision: 11, scale: 11
-    t.decimal  "volatility",      precision: 11, scale: 11
+    t.decimal  "rating",          precision: 22, scale: 11
+    t.decimal  "deviation",       precision: 22, scale: 11
+    t.decimal  "volatility",      precision: 22, scale: 11
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "number_of_games",                           default: 0
@@ -108,9 +108,9 @@ ActiveRecord::Schema.define(version: 20140530122819) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_judge",                                         default: false
-    t.decimal  "rating",                 precision: 11, scale: 11
-    t.decimal  "deviation",              precision: 11, scale: 11
-    t.decimal  "volatility",             precision: 11, scale: 11
+    t.decimal  "rating",                 precision: 22, scale: 11
+    t.decimal  "deviation",              precision: 22, scale: 11
+    t.decimal  "volatility",             precision: 22, scale: 11
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
